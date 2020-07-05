@@ -1,0 +1,55 @@
+
+{% if menu %}
+    {{ menu|safe }}
+{% endif %}
+
+
+{# Вывод в цикле всех flash сообщений если они есть #}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <h3>FLASH сообщение:</h3>
+        <ul>
+        {% for msg in messages %}
+            <li>
+                {{ msg }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+
+<h4>Форма загрузки файлов на сервер</h4>
+<form name='form_upload' action='/upload' method='POST' enctype="multipart/form-data">
+    <h5>Загрузка документа на сервер</h5>
+    <input name='file_1' type="file">
+    <br>
+    <button  name="go">В перед</button>
+</form>
+
+<pre>
+    При сохранении файла на сервер добавляем в форму поле:
+    <pre>
+        method='POST' enctype="multipart/form-data"
+    </pre>
+    Импортировав класс request из Flask, мы получаем возможность проверить
+    пришел запрос как POST метод или нет.
+    <pre>
+        if request.method == 'POST':
+    </pre>
+    И только в этом случае выполняем код по загрузке файла на сервер, доступ к
+    загруж. файлу мы получаем через метод files класса request, обьект который
+    содержит в себе все данные о запросе. Указываем ключ, который соответствует
+    имени поля в форме.
+    <pre>
+        file = request.files['name-of-file']
+    </pre>
+    И сохраняем файл на сервере по пути, где мы млжем дать файлу любое имя, но
+    доступ к изначальному имени можно получить через метод filename нашего обьекта
+    <pre>
+        file.save('uploads/' + file.filename)
+    </pre>
+    Все файл сохранен. Также по мимо этого всего мы можем импортировать из Flask
+    класс redirect, и при его помощи делать редирект на другие страницы.
+</pre>
+

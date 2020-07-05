@@ -1,0 +1,26 @@
+{% if menu %}
+    {{ menu|safe }}
+{% endif %}
+
+{# Вывод в цикле всех flash сообщений если они есть #}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+        {% for msg in messages %}
+            <li>
+                {{ msg }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<h4>Flask имеет возможность выводить flash сообщения.</h4>
+<pre>
+    С начала имортируем flash из Flask.
+    <pre>from flask import flash</pre>
+
+</pre>
+
+
+

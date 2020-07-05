@@ -1,0 +1,22 @@
+{# Вывод в цикле всех flash сообщений если они есть #}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+        {% for msg in messages %}
+            <li>
+                {{ msg }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<h4>Форма отправки</h4>
+<form name='form_1' action='' method='POST' enctype="multipart/form-data">
+    <h5>Логин 1</h5>
+    <input name='username'>
+    <h5>Пароль 1</h5>
+    <input name='password'>
+    <br>
+    <input type='submit'>
+</form>

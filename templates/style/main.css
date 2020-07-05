@@ -1,0 +1,11 @@
+body{
+    background: #9C1A1C;
+}
+
+
+form{
+    margin: 20px;
+    width: 400px;
+    height: 600px;
+    border: 1px solid black;
+}

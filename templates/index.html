@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if style_main %}
+        <link type="text/css" href="{{ style_main }}">
+    {% endif %}
+    <link type="text/css" href="style/main.css">
+    <title>Сервер на Flask</title>
+</head>
+<body>
+
+{% if menu %}
+    {{ menu|safe }}
+{% endif %}
+
+{% if header %}
+    <h1>{{ header }}</h1>
+{% endif %}
+
+{% if form %}
+    {{ form }}
+{% endif %}
+
+<h4>Стандартным для flask и Django шаблонизатором является Jinja2</h4>
+<pre>
+    Ипортируем из Flask модуль для работы render_template, первый аргумент которого это указание
+    на исполь-мый шаблон из директории templates.
+    <pre>from flask import templates</pre>
+    Все след арг-ты это переменные которые передаются в шаблон, если мы передаем в
+    переменной некий html то он по дефолту экранируется. Чтобы этого избежать, при выводе
+    переменной variebles в шаблоне, добавим ей фильтр |safe указывающий что этот html
+    экранировать не надо. вот таким образом:
+    <pre>variebles|safe</pre>
+    По мимо |safe есть еще другой метод, при помощи класса Markup
+    <pre>from flask import Markup</pre>
+</pre>
+
+
+<h4>Можно развернуть приложение на одной из платформ хостинга, предоставляющих
+    бесплатное размещение для малых проектов</h4>
+<pre>
+    Это можно сделать на Heroku там можно распологать не только python телеграм ботов.
+    1) Развёртывание приложения Flask в Heroku
+    2) Развёртывание приложения Flask на Webfaction
+    3) Развёртывание приложения Flask в Google App Engine
+    4) Общий доступ к локальному хосту с помощью Localtunnel
+    5) Можно просто расположить сайт на своем локальном хостинге,
+        и открыть его интернету при помощи ngrok
+</pre>
+
+
+
+<h4>Обьект запроса, передается как обьект класса request</h4>
+<pre>Импортируем его:
+    <pre>from flask import request</pre>
+    Метод запроса (GET,POST) доступен через атрибут request.method
+</pre>
+
+<h4>Логирование ошибок во flask</h4>
+<pre>
+    app.logger.debug('Значение для отладки')
+    app.logger.warning('Предупреждение: (%d яблок)', 42)
+    app.logger.error('Ошибка')
+</pre>
+
+<h4>Во flask можно добавить hooking создать промежуточный слой (middleware)</h4>
+<pre>
+    from werkzeug.contrib.fixers import LighttpdCGIRootFix
+    app.wsgi_app = LighttpdCGIRootFix(app.wsgi_app)
+</pre>
+
+
+
+</body>
+</html>
